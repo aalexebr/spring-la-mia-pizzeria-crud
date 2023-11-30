@@ -22,7 +22,7 @@ public class MainController {
 		
 		List<Pizza> pizzaList = pizzaService.findAll();
 		
-		model.addAttribute("pizzas", pizzaList.size() > 0 ? pizzaList : "none found");
+		model.addAttribute("pizzas", pizzaList);
 //		model.addAttribute("pizzas", pizzaList);
 		return("home");
 	}
