@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MainController {
@@ -18,12 +19,13 @@ public class MainController {
 	PizzaService pizzaService;
 	
 	@GetMapping("/")
-	public String home(Model model) {
+	public String home(Model model,
+			@RequestParam(required = false) String query) {
 		
-		List<Pizza> pizzaList = pizzaService.findAll();
-		
+		List<Pizza> pizzaList = query != null ? pizzaService.findByName(query) : pizzaService.findAll();
+//		List<Pizza> pizzaList = pizzaService.findByName("1");			
 		model.addAttribute("pizzas", pizzaList);
-//		model.addAttribute("pizzas", pizzaList);
+		model.addAttribute("query", query);
 		return("home");
 	}
 	

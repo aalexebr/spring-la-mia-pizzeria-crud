@@ -14,6 +14,8 @@
 	<main>
 		<h1 th:if="${pizzas.size() ==  0}">no pizzas found</h1>
 		<div class="container p-4" th:if="${pizzas.size() > 0}">
+			
+			
 			<h1>
 				Pizzas:
 			</h1>
@@ -37,6 +39,15 @@
 			    </tr>
 			  </tbody>
 			</table>
+			
+			<form>
+			  <div class="mb-3">
+			    <label for="name" class="form-label">name of pizza</label>
+			    <input th:value="${query}"
+			    	type="text" name="query" class="form-control" id="name" aria-describedby="name">
+			  </div>
+			  <button type="submit" class="btn btn-primary">Submit</button>
+			</form>
 		</div>
 
 	</main>
