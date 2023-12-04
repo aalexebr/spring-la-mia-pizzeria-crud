@@ -1,11 +1,17 @@
 package org.java.spring.pojo;
 
+
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name="pizza")
@@ -16,12 +22,17 @@ public class Pizza {
 	private Integer id;
 	
 	@Column(nullable = false)
+	@NotBlank(message = "Name is mandatory")
+	@NotNull(message = "Name cannot be null")
+	@NotEmpty(message = "Name cannot be null") 
 	private String name;
 	
 	@Column(columnDefinition = "TEXT")
 	private String description;
 	
 	@Column(nullable = false)
+	@NotNull(message = "Price cannot be null")
+	@Positive(message = "Price must be positive")
 	private double price;
 	
 	private String url;
