@@ -21,7 +21,7 @@ public class Pizza {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	@NotBlank(message = "Name is mandatory")
 	@NotNull(message = "Name cannot be null")
 	@NotEmpty(message = "Name cannot be null") 
