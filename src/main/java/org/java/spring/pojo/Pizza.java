@@ -2,6 +2,8 @@ package org.java.spring.pojo;
 
 
 
+import org.hibernate.validator.constraints.Length;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,10 +23,11 @@ public class Pizza {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = true, length = 32)
 	@NotBlank(message = "Name is mandatory")
 	@NotNull(message = "Name cannot be null")
-	@NotEmpty(message = "Name cannot be null") 
+	@NotEmpty(message = "Name cannot be null")
+	@Length(max = 32, message = "name must be max 32 chars")
 	private String name;
 	
 	@Column(columnDefinition = "TEXT")
