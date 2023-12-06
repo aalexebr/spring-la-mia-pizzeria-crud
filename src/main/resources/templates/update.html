@@ -1,0 +1,59 @@
+<!doctype html>
+<!-- html tag with Thymeleaf -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap CSS -->
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+	<title>home</title>
+</head>
+<body>
+	<div class="container">
+		<h1 class="text-center">
+			Update a Pizza
+		</h1>
+		<div class="d-flex justify-content-center">
+			<form method="POST" th:object="${pizza}">
+				
+				<div>
+					<label for="name" class="form-label">insert name</label>
+					<input th:field="*{name}"
+						class="form-control"
+						type="text" name="name" id="name">
+					<div th:replace="fragments :: errorDiv('name')" />
+				</div>
+				
+				<div>
+					<label for="price" class="form-label">insert price</label>
+					<input th:field="*{price}"
+						class="form-control"
+						type="number" name="price" id="price" step=".01">
+					<div th:replace="fragments :: errorDiv('price')" />
+				</div>
+				
+				<div>
+					<label for="description" class="form-label">insert desc</label>
+					<input th:field="*{description}"
+						class="form-control"
+						type="text" name="description" id="description">
+					<div th:replace="fragments :: errorDiv('description')" />
+				</div>
+				
+				<div>
+					<label for="url" class="form-label">insert url for pic</label>
+					<input th:field="*{url}"
+						class="form-control"
+						type="text" name="url" id="url">
+					<div th:replace="fragments :: errorDiv('url')" />
+				</div>
+
+				<button class="btn btn-success my-4" type="submit">Create</button>
+			</form>
+			
+		</div>
+		
+	</div>
+</body>
+</html>

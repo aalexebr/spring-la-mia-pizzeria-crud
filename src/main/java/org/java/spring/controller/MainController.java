@@ -44,7 +44,7 @@ public class MainController {
 	}
 	
 	@GetMapping("/pizza/create")
-	public String creatPizza(Model model) {
+	public String createPizza(Model model) {
 		Pizza newPizza = new Pizza();
 		model.addAttribute("pizza", newPizza);
 		return("pizza-create");
@@ -77,7 +77,52 @@ public class MainController {
 		return("redirect:/");
 	}
 	
+	@GetMapping("/pizza/edit/{id}")
+	public String editPizza(Model model,
+			@PathVariable int id) {
+		
+		Pizza pizza = pizzaService.findById(id);
+		model.addAttribute("pizza", pizza);
+		System.out.println(pizza);	
+		return("update");
+	}
 	
+	@PostMapping("/pizza/edit/{id}")
+	public String updatePizza(Model model,
+			@Valid @ModelAttribute Pizza pizza, 
+			BindingResult bindingResult){
+	System.out.println(pizza);	
+
+		if (bindingResult.hasErrors()) {
+			
+			System.out.println(bindingResult);
+			model.addAttribute("pizza", pizza);
+			return "update";
+		}
+		pizzaService.save(pizza);
+		
+		try {
+			
+			pizzaService.save(pizza);
+		} catch(Exception e) {
+			
+			bindingResult.addError(new FieldError("pizza", "name", pizza.getName(), false, null, null, "Name must be unique"));
+			model.addAttribute("pizza", pizza);
+			return "update";
+		}
+
+		return("redirect:/");
+	}
+	
+	@PostMapping("/pizza/delete/{id}")
+	public String deleteBook(@PathVariable int id) {
+		
+		Pizza pizza = pizzaService.findById(id);
+		
+		pizzaService.delete(pizza);
+		
+		return "redirect:/";
+	}
 	
 	
 

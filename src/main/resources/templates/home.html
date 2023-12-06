@@ -27,6 +27,8 @@
 			      <th scope="col">Price</th>
 			      <th scope="col">Description</th>
 			      <th scope="col">link</th>
+			      <th scope="col">edit</th>
+			      <th scope="col">delete</th>
 			    </tr>
 			  </thead>
 			  <tbody>
@@ -36,6 +38,15 @@
 			      <td>[[${pizza.price}]]</td>
 			      <td>[[${pizza.description}]]</td>
 			      <td><a th:href="@{/pizza/{id}(id=${pizza.id})}">link</a></td>
+			      <td><a th:href="@{/pizza/edit/{id}(id=${pizza.id})}">edit</a></td>
+			      <td>
+					  <form 
+						th:action="@{/pizza/delete/{id} (id=${pizza.id})}"
+						method="POST">
+					
+						<button type="submit" class="btn btn-danger">delete</button>	
+					</form>
+				  </td>
 			    </tr>
 			  </tbody>
 			</table>
